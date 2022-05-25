@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<head>
+    <meta
+        name="viewport"
+        content="width=device-width, initial"
+        charset="utf-8"
+    />
+    <title>COVID and I</title>
+    <link rel="stylesheet" href="./css/calender.css" />
+    <link rel="stylesheet" href="./css/default.css" />
+    <script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+    ></script>
+    <script type="text/javascript" src="./js/topics.js"></script>
+</head>
+<body>
+    <h1>COVID and I</h1>
+
+    <div class="flex full-width section">
+        <div id="calender-container">
+            <!-- Credit --->
+            <!-- how to calculate feColorMatrix - http://bit.ly/2t4ZuoC --->
+            <!-- photo credit - https://flic.kr/p/pG4piA --->
+            <!-- RGB color parser - http://mementoo.info/archives/594 --->
+
+            <svg style="visibility: hidden" width="0" height="0">
+                <filter id="duotone" color-interpolation-filters="sRGB">
+                    <feColorMatrix
+                        type="matrix"
+                        values="0.7 0 0 0 0.3 0.6 0 0 0 0.2 0.3 0 0 0 0.6 0 0 0 1 0"
+                    ></feColorMatrix>
+                </filter>
+            </svg>
+
+            <div class="flex-container">
+                <div class="calendar-container">
+                    <div class="image-container">
+                        <div class="image"></div>
+                    </div>
+                    <div class="calendar">
+                        <h2 class="month-title" id="js-month"></h2>
+                        <table class="calendar-table">
+                            <thead>
+                                <tr>
+                                    <th>日</th>
+                                    <th>月</th>
+                                    <th>火</th>
+                                    <th>水</th>
+                                    <th>木</th>
+                                    <th>金</th>
+                                    <th>土</th>
+                                </tr>
+                            </thead>
+                            <tbody id="js-calendar-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>今天可是个大日子</h2>
+            <li>今年出生了这么多人</li>
+            <div class="world-counts-div">
+                <iframe
+                    title="World population"
+                    src="https://www.theworldcounts.com/embed/populations/125?color=white&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=20"
+                    style="border: none"
+                    height="300"
+                    width="300"
+                ></iframe>
+            </div>
+            <li>现在有这么多人</li>
+            <div class="world-counts-div">
+                <iframe
+                    title="Number of births"
+                    src="https://www.theworldcounts.com/embed/challenges/8?color=white&font_family=%22Helvetica+Neue%22%2C+Arial%2C+sans-serif&font_size=20"
+                    style="border: none"
+                    height="300"
+                    width="300"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex full-width section" style="align-items: baseline">
+        <div id="questions-div-1">
+            <h2>所以，你今天过得如何？</h2>
+            <button onclick="randomInput()">我懒，请帮我填</button>
+            <div class="qa">
+                <li>你几点起床的？</li>
+                <input
+                    type="text"
+                    placeholder="【比如，6点？】"
+                    onchange="onInput()"
+                />
+            </div>
+
+            <div class="qa">
+                <li>中午吃的啥？</li>
+                <input
+                    type="text"
+                    placeholder="【各种好吃的】"
+                    onchange="onInput()"
+                />
+            </div>
+
+            <div class="qa">
+                <li>看了什么书？</li>
+                <input
+                    type="text"
+                    placeholder="【HTML从入门到入土】"
+                    onchange="onInput()"
+                />
+            </div>
+
+            <div class="qa">
+                <li>做了什么运动？</li>
+                <input
+                    type="text"
+                    placeholder="【买菜、做饭然后打工】"
+                    onchange="onInput()"
+                />
+            </div>
+
+            <div class="qa">
+                <li>还想跟自己说点什么？</li>
+                <textarea
+                    onchange="onInput()"
+                    style="height: 8em"
+                    placeholder="【来点实际的，比如我今天太帅了。】"
+                ></textarea>
+            </div>
+        </div>
+
+        <div id="unsplash-div-1">
+            <h2>看来今天过得不错</h2>
+            <h3 id="key-word-1">关键词：</h3>
+            <button onclick="onInput()">换一张</button>
+            <br />
+            <p id="image-onload-notion-1">下一张图像正在加载，别着急</p>
+            <image
+                id="unsplash-image-1"
+                src="https://source.unsplash.com/random/400x0/"
+                onload="imgOnload()"
+            ></image>
+            <p>Data source: https://unsplash.com/</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>再看看疫情吧</h2>
+        <p>这里有 BAIDU 和 WHO 的信息，选一个你喜欢的看看。</p>
+        <div class="flex full-width">
+            <p>Baidu</p>
+            <input type="checkbox" onchange="toggleBaidu(this)" />
+            <p>WHO</p>
+            <input type="checkbox" checked onchange="toggleWHO(this)" />
+        </div>
+
+        <iframe
+            id="baidu-iframe"
+            width="100%"
+            height="800"
+            style="max-width: 800px; display: none; background-color: white"
+            src="https://voice.baidu.com/act/newpneumonia/newpneumonia/#tab0"
+        ></iframe>
+
+        <iframe
+            id="who-iframe"
+            width="100%"
+            height="800"
+            style="max-width: 800px; background-color: white"
+            src="https://covid19.who.int/"
+        ></iframe>
+    </div>
+
+    <script type="text/javascript" src="./js/calender.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+</body>
